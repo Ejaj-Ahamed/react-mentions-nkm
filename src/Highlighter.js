@@ -27,6 +27,7 @@ function Highlighter({
   children,
   singleLine,
   style,
+  highlightID
 }) {
   const [position, setPosition] = useState({ left: undefined, top: undefined })
   const [caretElement, setCaretElement] = useState()
@@ -141,7 +142,7 @@ function Highlighter({
   }
 
   return (
-    <div {...style} ref={containerRef}>
+    <div id={'highlighter_'+highlightID} {...style} ref={containerRef}>
       {resultComponents}
     </div>
   )
@@ -151,6 +152,7 @@ Highlighter.propTypes = {
   selectionStart: PropTypes.number,
   selectionEnd: PropTypes.number,
   value: PropTypes.string.isRequired,
+  highlightID: PropTypes.string,
   onCaretPositionChange: PropTypes.func.isRequired,
   containerRef: PropTypes.oneOfType([
     PropTypes.func,
@@ -185,7 +187,7 @@ const styled = defaultStyle(
     },
 
     substring: {
-      visibility: 'hidden',
+      color:'black'
     },
   },
   (props) => ({
